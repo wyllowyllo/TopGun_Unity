@@ -8,17 +8,19 @@ public class Player_move : MonoBehaviour
     Animator anime;
     public float speed;
     public float power;
+    public int life;
+    public int score;
 
     public bool top_collision;
     public bool bottom_collision;
     public bool left_collsion;
     public bool right_collsion;
 
-   
+
     public float maxShotDelay;
     public float curShotDelay;
 
-
+    public GameManager manager;
     public GameObject bulletObjA;
     public GameObject bulletObjB;
 
@@ -78,7 +80,7 @@ public class Player_move : MonoBehaviour
                     break;
 
                 case 2:
-                    GameObject bulletL = Instantiate(bulletObjA, transform.position+Vector3.left*0.1f, transform.rotation);
+                    GameObject bulletL = Instantiate(bulletObjA, transform.position + Vector3.left * 0.1f, transform.rotation);
                     GameObject bulletR = Instantiate(bulletObjA, transform.position + Vector3.right * 0.1f, transform.rotation);
                     Rigidbody2D rigidL = bulletL.GetComponent<Rigidbody2D>();
                     Rigidbody2D rigidR = bulletR.GetComponent<Rigidbody2D>();
@@ -88,7 +90,7 @@ public class Player_move : MonoBehaviour
                     break;
 
                 case 3:
-                    GameObject bulletLL = Instantiate(bulletObjA, transform.position+Vector3.left*0.35f, transform.rotation);
+                    GameObject bulletLL = Instantiate(bulletObjA, transform.position + Vector3.left * 0.35f, transform.rotation);
                     GameObject bulletRR = Instantiate(bulletObjA, transform.position + Vector3.right * 0.35f, transform.rotation);
                     GameObject bulletCC = Instantiate(bulletObjB, transform.position, transform.rotation);
                     Rigidbody2D rigidLL = bulletLL.GetComponent<Rigidbody2D>();
@@ -99,7 +101,7 @@ public class Player_move : MonoBehaviour
                     rigidCC.AddForce(Vector2.up * 10, ForceMode2D.Impulse);
                     break;
             }
-            
+
 
             curShotDelay = 0;
         }
@@ -127,7 +129,7 @@ public class Player_move : MonoBehaviour
                     right_collsion = true;
                     break;
             }
-        }   
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -152,6 +154,13 @@ public class Player_move : MonoBehaviour
                     right_collsion = false;
                     break;
             }
+        }
+
+        else if (collision.gameObject.tag == "Enemy"|| collision.gameObject.tag == "EnemyBullet")
+        {
+            manager.RespawnPlayer();
+            gameObject.SetActive(false);
+
         }
     }
 }
