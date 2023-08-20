@@ -269,7 +269,7 @@ GameObject:
   - component: {fileID: 134980233}
   - component: {fileID: 134980232}
   m_Layer: 5
-  m_Name: Life Image (1)
+  m_Name: Life Image 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -487,7 +487,7 @@ GameObject:
   - component: {fileID: 312463500}
   - component: {fileID: 312463499}
   m_Layer: 5
-  m_Name: Life Image (2)
+  m_Name: Life Image 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1051,6 +1051,7 @@ MonoBehaviour:
   power: 3
   life: 3
   score: 0
+  isHit: 0
   top_collision: 0
   bottom_collision: 0
   left_collsion: 0
@@ -1251,6 +1252,44 @@ Transform:
   m_Father: {fileID: 936778911}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1265898408
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1265898409}
+  m_Layer: 5
+  m_Name: Game over set
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &1265898409
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1265898408}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1690365595}
+  - {fileID: 1471666471}
+  m_Father: {fileID: 1723951700}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1270522821
 GameObject:
   m_ObjectHideFlags: 0
@@ -1294,6 +1333,12 @@ MonoBehaviour:
   - {fileID: 2080466283}
   - {fileID: 762082460}
   - {fileID: 346717839}
+  Score_text: {fileID: 262892486}
+  Health_image:
+  - {fileID: 1658134054}
+  - {fileID: 134980232}
+  - {fileID: 312463499}
+  Gameover_set: {fileID: 1265898408}
   player: {fileID: 1123723964}
   curSpawnDelay: 0
   maxSpawnDelay: 2
@@ -1478,13 +1523,13 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1471666470}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 466114709}
-  m_Father: {fileID: 1723951700}
+  m_Father: {fileID: 1265898409}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -1535,7 +1580,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1471666473}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1270522822}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: GameRetry
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1471666473
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1722,7 +1779,7 @@ GameObject:
   - component: {fileID: 1658134055}
   - component: {fileID: 1658134054}
   m_Layer: 5
-  m_Name: Life Image
+  m_Name: Life Image 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1811,12 +1868,12 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1690365594}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1723951700}
+  m_Father: {fileID: 1265898409}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -1884,7 +1941,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1723951697
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1964,8 +2021,7 @@ RectTransform:
   - {fileID: 1658134053}
   - {fileID: 134980231}
   - {fileID: 312463498}
-  - {fileID: 1690365595}
-  - {fileID: 1471666471}
+  - {fileID: 1265898409}
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

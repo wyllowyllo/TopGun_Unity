@@ -10,7 +10,7 @@ public class Player_move : MonoBehaviour
     public float power;
     public int life;
     public int score;
-
+    public bool isHit; //중복피격 방지
     public bool top_collision;
     public bool bottom_collision;
     public bool left_collsion;
@@ -110,7 +110,7 @@ public class Player_move : MonoBehaviour
     {
         if (collision.gameObject.tag == "Border")
         {
-            Debug.Log("sdfsdfsd");
+            
             switch (collision.gameObject.name)
             {
                 case "Top":
@@ -158,7 +158,22 @@ public class Player_move : MonoBehaviour
 
         else if (collision.gameObject.tag == "Enemy"|| collision.gameObject.tag == "EnemyBullet")
         {
-            manager.RespawnPlayer();
+
+            if (isHit)
+                return;
+
+            life--;
+
+            if (life <= 0)
+            {
+                manager.GameOver();
+            }
+            else
+            {
+                manager.RespawnPlayer();
+            }
+
+            manager.UpdateLifeImage(life);
             gameObject.SetActive(false);
 
         }

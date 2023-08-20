@@ -3,20 +3,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     public GameObject[] enemyObjs;
     public Transform[] spawnPoints;
-    //public Text Score_text;
-    //public Image[] Health_image;
-    //public GameObject Gameover_set;
+    public Text Score_text;
+    public Image[] Health_image;
+    public GameObject Gameover_set;
     public GameObject player;
 
     public float curSpawnDelay;
     public float maxSpawnDelay;
 
+   
     private void Update()
     {
         curSpawnDelay += Time.deltaTime;
@@ -29,7 +30,9 @@ public class GameManager : MonoBehaviour
         }
 
         Player_move playerLogic = player.GetComponent<Player_move>();
-        //Score_text.text = string.Format("{0:n0}", playerLogic.score); 
+        Score_text.text = string.Format("{0:n0}", playerLogic.score);
+
+       
 
     }
 
@@ -75,7 +78,31 @@ public class GameManager : MonoBehaviour
     {
         player.transform.position = new Vector3(0, -3.5f, 0);
         player.SetActive(true);
+
+        Player_move playerLogic = player.GetComponent<Player_move>();
+        playerLogic.isHit = false;
     }
 
+    public void UpdateLifeImage(int life)
+    {
 
+        for (int i = 0; i < 3; i++)
+            Health_image[i].color = new Color(1, 1, 1, 0);
+
+        for (int i = 0; i < life; i++)
+        {
+            Health_image[i].color = new Color(1, 1, 1, 1);
+        }
+       
+    }
+
+    public void GameOver()
+    {
+        Gameover_set.SetActive(true);
+    }
+
+    public void GameRetry()
+    {
+        SceneManager.LoadScene(0);
+    }
 }
