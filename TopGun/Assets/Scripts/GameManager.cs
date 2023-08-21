@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     public Transform[] spawnPoints;
     public Text Score_text;
     public Image[] Health_image;
+    public Image[] Boom_image;
     public GameObject Gameover_set;
     public GameObject player;
 
@@ -94,6 +95,19 @@ public class GameManager : MonoBehaviour
             Health_image[i].color = new Color(1, 1, 1, 1);
         }
        
+    }
+
+    public void UpdateBoomImage(int boom)
+    {
+
+        for (int i = 0; i < 3; i++)
+            Boom_image[i].color = new Color(1, 1, 1, 0);
+
+        for (int i = 0; i < boom; i++)
+        {
+            Boom_image[i].color = new Color(1, 1, 1, 1);
+        }
+
     }
 
     public void GameOver()

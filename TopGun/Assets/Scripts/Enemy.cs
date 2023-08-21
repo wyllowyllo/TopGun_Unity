@@ -14,6 +14,9 @@ public class Enemy : MonoBehaviour
     public GameObject player;
     public GameObject bulletObjA;
     public GameObject bulletObjB;
+    public GameObject ItemBoom;
+    public GameObject ItemCoin;
+    public GameObject ItemPower;
     public float maxShotDelay;
     public float curShotDelay;
 
@@ -64,8 +67,12 @@ public class Enemy : MonoBehaviour
         curShotDelay += Time.deltaTime;
     }
 
-    void OnHit(int dmg)
+    public void OnHit(int dmg)
     {
+        //exception handling in double_itemdrop
+        if (health <= 0)
+            return;
+
         health -= dmg;
         spriteRenderer.sprite = sprites[1];
         Invoke("ToOriSprite", 0.1f);
@@ -74,7 +81,24 @@ public class Enemy : MonoBehaviour
         {
             Player_move playerLogic = player.GetComponent<Player_move>();
             playerLogic.score += Enemy_score;
+
+            bool isdrop = (Random.Range(0, 2) == 0) ? false : true;
+
+            if (isdrop)
+            {
+                int dropType = Random.Range(0, 10);
+
+                if (dropType < 5)
+                    Instantiate(ItemCoin, gameObject.transform.position, ItemCoin.transform.rotation);
+                else if (dropType < 7)
+                    Instantiate(ItemPower, gameObject.transform.position, ItemPower.transform.rotation);
+                else if (dropType < 9)
+                    Instantiate(ItemBoom, gameObject.transform.position, ItemBoom.transform.rotation);
+
+            }
+            
             Destroy(gameObject);
+
         }
 
     }
