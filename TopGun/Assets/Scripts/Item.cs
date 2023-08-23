@@ -6,9 +6,9 @@ public class Item : MonoBehaviour
 {
     public string Item_type;
     Rigidbody2D rigid;
-    private void Awake()
+    private void OnEnable()
     {
-        rigid = GetComponent<Rigidbody2D>();
-        rigid.velocity = Vector2.down * 0.1f;
+        rigid = gameObject.GetComponent<Rigidbody2D>();
+        rigid.velocity = Vector3.down * 1.5f;
     }
 }

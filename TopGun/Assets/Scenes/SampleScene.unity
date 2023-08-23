@@ -1785,7 +1785,8 @@ MonoBehaviour:
   right_collsion: 0
   maxShotDelay: 0.15
   curShotDelay: 0
-  manager: {fileID: 1270522822}
+  gameManager: {fileID: 1270522822}
+  objManager: {fileID: 1947017450}
   bulletObjA: {fileID: 5078738507278489658, guid: 6dcd5924c023c6c4ebc226139556390f, type: 3}
   bulletObjB: {fileID: 5143879910363100267, guid: 4e8a99ef6bc32f8468a049d91b68b78e, type: 3}
   boom_effect: {fileID: 12388527}
@@ -2177,10 +2178,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0ff80b56de3a7542891c8d87dcbfad0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyObjs:
-  - {fileID: 5307770031105503916, guid: 62f251539205f3842bbdffd33bf5f7c7, type: 3}
-  - {fileID: 3605660726210867889, guid: b338018ce6b30ae43910c6e36868f12b, type: 3}
-  - {fileID: 1244620263491342495, guid: 2f2c9db301cf43843ac6dca3132217f0, type: 3}
   spawnPoints:
   - {fileID: 2144312971}
   - {fileID: 203008153}
@@ -2202,6 +2199,7 @@ MonoBehaviour:
   - {fileID: 1275250666}
   Gameover_set: {fileID: 1265898408}
   player: {fileID: 1123723964}
+  objManager: {fileID: 1947017450}
   curSpawnDelay: 0
   maxSpawnDelay: 2
 --- !u!4 &1270522823
@@ -3319,6 +3317,60 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!1 &1947017449
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1947017451}
+  - component: {fileID: 1947017450}
+  m_Layer: 0
+  m_Name: ObjectManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1947017450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1947017449}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e98d8b150f31c394b8d1b6204308e92b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyLPrefabs: {fileID: 1244620263491342495, guid: 2f2c9db301cf43843ac6dca3132217f0, type: 3}
+  enemyMPrefabs: {fileID: 3605660726210867889, guid: b338018ce6b30ae43910c6e36868f12b, type: 3}
+  enemySPrefabs: {fileID: 5307770031105503916, guid: 62f251539205f3842bbdffd33bf5f7c7, type: 3}
+  itemCoinPrefabs: {fileID: 6787234895135528108, guid: add567b9adcf7a743a2dbe3395467ec6, type: 3}
+  itemBoomPrefabs: {fileID: 1137972445937034200, guid: ac48b02cb63606749a24cfe8bc74b282, type: 3}
+  itemPowerPrefabs: {fileID: 6987344353012290852, guid: 2d48d09940ffc174892b16dcb83c4bb9, type: 3}
+  bulletPlayerAPrefabs: {fileID: 5078738507278489658, guid: 6dcd5924c023c6c4ebc226139556390f, type: 3}
+  bulletPlayerBPrefabs: {fileID: 5143879910363100267, guid: 4e8a99ef6bc32f8468a049d91b68b78e, type: 3}
+  bulletEnemyAPrefabs: {fileID: 5143879910363100267, guid: b5452f9e79379d4429d0d31455078a0c, type: 3}
+  bulletEnemyBPrefabs: {fileID: 5143879910363100267, guid: 8d29d3ececdf03645967cb4a7aa30022, type: 3}
+--- !u!4 &1947017451
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1947017449}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.2074934, y: 6.5009933, z: -0.059062786}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2008216204
 GameObject:
   m_ObjectHideFlags: 0

@@ -7,18 +7,23 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public GameObject[] enemyObjs;
+    string[] enemyObjs;
     public Transform[] spawnPoints;
     public Text Score_text;
     public Image[] Health_image;
     public Image[] Boom_image;
     public GameObject Gameover_set;
     public GameObject player;
+    public ObjectManager objManager;
 
     public float curSpawnDelay;
     public float maxSpawnDelay;
 
-   
+
+    private void Awake()
+    {
+        enemyObjs = new string[] { "enemyS", "enemyM", "enemyL" };
+    }
     private void Update()
     {
         curSpawnDelay += Time.deltaTime;
@@ -42,11 +47,15 @@ public class GameManager : MonoBehaviour
         int ranEnemy= UnityEngine.Random.Range(0, 3);
         int ranPos = UnityEngine.Random.Range(0, 9);
 
-        GameObject enemy=Instantiate(enemyObjs[ranEnemy], spawnPoints[ranPos].position, spawnPoints[ranPos].rotation);
+        //GameObject enemy=Instantiate(enemyObjs[ranEnemy], spawnPoints[ranPos].position, spawnPoints[ranPos].rotation);
+       
+        GameObject enemy = objManager.MakeObj(enemyObjs[ranEnemy]);
+        enemy.transform.position = spawnPoints[ranPos].position;
 
         Rigidbody2D rigid = enemy.GetComponent<Rigidbody2D>();
         Enemy enemyLogic = enemy.GetComponent<Enemy>();
         enemyLogic.player = player; //pass the player's info 
+        enemyLogic.objManager = objManager;//pass the Objectmanager's info 
 
         //set the velocity of each positon
         //right

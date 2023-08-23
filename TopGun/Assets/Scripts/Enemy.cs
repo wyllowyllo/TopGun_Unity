@@ -8,6 +8,7 @@ public class Enemy : MonoBehaviour
     public float speed;
     public int health;
     public int Enemy_score;
+    int oriHealth;
     public Sprite[] sprites;
     SpriteRenderer spriteRenderer;
 
@@ -17,12 +18,14 @@ public class Enemy : MonoBehaviour
     public GameObject ItemBoom;
     public GameObject ItemCoin;
     public GameObject ItemPower;
+    public ObjectManager objManager;
     public float maxShotDelay;
     public float curShotDelay;
 
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        oriHealth = health;
        
     }
 
@@ -40,16 +43,19 @@ public class Enemy : MonoBehaviour
 
         if (enemyName == "S")
         {
-            GameObject bullet = Instantiate(bulletObjA, transform.position, transform.rotation); //Obj »ý¼º
+            GameObject bullet = objManager.MakeObj("bulletEnemyA");
+            bullet.transform.position = transform.position;
             Rigidbody2D rigid = bullet.GetComponent<Rigidbody2D>();
 
             Vector3 dirVec = player.transform.position - transform.position;
-            rigid.AddForce(dirVec.normalized * 3, ForceMode2D.Impulse);
+            rigid.AddForce(dirVec.normalized * 5, ForceMode2D.Impulse);
         }
         else if (enemyName == "L")
         {
-            GameObject bulletR = Instantiate(bulletObjB, transform.position+Vector3.right*0.3f, transform.rotation); 
-            GameObject bulletL = Instantiate(bulletObjB, transform.position+Vector3.left*0.3f, transform.rotation); 
+            GameObject bulletR = objManager.MakeObj("bulletEnemyB");
+            GameObject bulletL = objManager.MakeObj("bulletEnemyB");
+            bulletR.transform.position = transform.position + Vector3.right * 03;
+            bulletL.transform.position = transform.position + Vector3.left * 03;
             Rigidbody2D rigidR = bulletR.GetComponent<Rigidbody2D>();
             Rigidbody2D rigidL = bulletL.GetComponent<Rigidbody2D>();
             Vector3 dirVecR = player.transform.position - transform.position;
@@ -88,19 +94,46 @@ public class Enemy : MonoBehaviour
             {
                 int dropType = Random.Range(0, 10);
 
-                if (dropType < 5)
-                    Instantiate(ItemCoin, gameObject.transform.position, ItemCoin.transform.rotation);
+                if (dropType < 5) {
+                    GameObject ItemCoin=objManager.MakeObj("itemCoin");
+                    ItemCoin.transform.position = transform.position;
+                   
+                }
+                   
                 else if (dropType < 7)
-                    Instantiate(ItemPower, gameObject.transform.position, ItemPower.transform.rotation);
+                {
+                    GameObject ItemPower = objManager.MakeObj("itemPower");
+                    ItemPower.transform.position = transform.position;
+                   
+                }
+                   
                 else if (dropType < 9)
-                    Instantiate(ItemBoom, gameObject.transform.position, ItemBoom.transform.rotation);
-
+                {
+                    GameObject ItemBoom = objManager.MakeObj("itemBoom");
+                    ItemBoom.transform.position = transform.position;
+                   
+                }
+                    
             }
-            
-            Destroy(gameObject);
 
+            gameObject.SetActive(false);
+            transform.rotation = Quaternion.identity; // set to the default rotation value(0)
         }
 
+    }
+
+    private void OnEnable()
+    {
+
+        /*switch(enemyName){
+            case "L":
+                break;
+            case "M":
+                break;
+            case "S":
+                break;
+        }*/
+        health = oriHealth;
     }
 
     void ToOriSprite()
@@ -111,13 +144,18 @@ public class Enemy : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "BorderBullet")
-            Destroy(gameObject);
+        {
+            gameObject.SetActive(false);
+            transform.rotation = Quaternion.identity;
+        }
+           
 
         else if (collision.gameObject.tag == "PlayerBullet")
         {
             Bullet bullet = collision.gameObject.GetComponent<Bullet>();
             OnHit(bullet.dmg);
-            Destroy(collision.gameObject);
+            collision.gameObject.SetActive(false);
+            
         }
 
        
