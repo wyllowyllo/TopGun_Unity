@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3546070839353316882}
   - component: {fileID: 1295524038684806400}
   - component: {fileID: 1408823548029772610}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Power
   m_TagString: Item
   m_Icon: {fileID: 0}

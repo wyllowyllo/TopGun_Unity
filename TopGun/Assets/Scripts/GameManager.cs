@@ -91,6 +91,14 @@ public class GameManager : MonoBehaviour
 
         Player_move playerLogic = player.GetComponent<Player_move>();
         playerLogic.isHit = false;
+
+        player.layer = 6;
+        Invoke("InvincibilityOff", 2.0f);
+    }
+
+    void InvincibilityOff()
+    {
+        player.layer = 3;
     }
 
     public void UpdateLifeImage(int life)
