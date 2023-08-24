@@ -178,7 +178,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyName: M
-  speed: 3
+  speed: 8
   health: 20
   Enemy_score: 80
   sprites:
@@ -190,5 +190,6 @@ MonoBehaviour:
   ItemBoom: {fileID: 1137972445937034200, guid: ac48b02cb63606749a24cfe8bc74b282, type: 3}
   ItemCoin: {fileID: 6787234895135528108, guid: add567b9adcf7a743a2dbe3395467ec6, type: 3}
   ItemPower: {fileID: 6987344353012290852, guid: 2d48d09940ffc174892b16dcb83c4bb9, type: 3}
+  objManager: {fileID: 0}
   maxShotDelay: 0
   curShotDelay: 0
