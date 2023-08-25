@@ -29,7 +29,7 @@ public class Player_move : MonoBehaviour
     public GameObject bulletObjA;
     public GameObject bulletObjB;
     public GameObject boom_effect;
-   
+    public GameObject[] followers;
     private void Awake()
     {
         anime = GetComponent<Animator>();
@@ -99,7 +99,7 @@ public class Player_move : MonoBehaviour
 
                     break;
 
-                case 3:
+                default:
                     GameObject bulletLL = objManager.MakeObj("bulletPlayerA");            
                     GameObject bulletRR = objManager.MakeObj("bulletPlayerA");                 
                     GameObject bulletCC = objManager.MakeObj("bulletPlayerB");
@@ -134,6 +134,7 @@ public class Player_move : MonoBehaviour
             GameObject[] enemiesS = objManager.GetPool("enemyS");
             GameObject[] enemiesM = objManager.GetPool("enemyM");
             GameObject[] enemiesL = objManager.GetPool("enemyL");
+            
 
             //GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
             for (int i = 0; i < enemiesS.Length; i++)
@@ -165,8 +166,8 @@ public class Player_move : MonoBehaviour
             }
 
             //remove bullets
-            GameObject[] bulletEnemyA = objManager.GetPool("enemyS");
-            GameObject[] bulletEnemyB = objManager.GetPool("enemyM");
+            GameObject[] bulletEnemyA = objManager.GetPool("bulletEnemyA");
+            GameObject[] bulletEnemyB = objManager.GetPool("bulletEnemyB");
             //GameObject[] bullets = GameObject.FindGameObjectsWithTag("EnemyBullet");
             for (int i = 0; i < bulletEnemyA.Length; i++)
             {
@@ -238,10 +239,9 @@ public class Player_move : MonoBehaviour
             switch (item.Item_type)
             {
                 case "Power":
-                    if (power < max_power)
-                        power++;
-                    else
-                        score += 500;
+                    power++;
+                    AddFollower();
+                  
                     break;
 
                 case "Coin":
@@ -295,5 +295,15 @@ public class Player_move : MonoBehaviour
     {
         boom_effect.SetActive(false);
         isboom_time = false;
+    }
+
+    void AddFollower()
+    {
+        if (power == 4)
+            followers[0].SetActive(true);
+        else if (power == 5)
+            followers[1].SetActive(true);
+        else if (power == 6)
+            followers[2].SetActive(true);
     }
 }

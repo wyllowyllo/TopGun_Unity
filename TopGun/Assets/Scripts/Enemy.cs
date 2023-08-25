@@ -100,7 +100,7 @@ public class Enemy : MonoBehaviour
                    
                 }
                    
-                else if (dropType < 7)
+                else if (dropType <7)
                 {
                     GameObject ItemPower = objManager.MakeObj("itemPower");
                     ItemPower.transform.position = transform.position;
