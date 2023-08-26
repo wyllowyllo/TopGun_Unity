@@ -11,6 +11,7 @@ public class Enemy : MonoBehaviour
     int oriHealth;
     public Sprite[] sprites;
     SpriteRenderer spriteRenderer;
+    Animator anime;
 
     public GameObject player;
     public GameObject bulletObjA;
@@ -27,11 +28,14 @@ public class Enemy : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         oriHealth = health;
        
+        if(enemyName=="B")
+            anime= GetComponent<Animator>();
     }
 
     void Update()
     {
-       
+        if (enemyName == "B")
+            return;
         Fire();
         Reload();
     }
@@ -80,41 +84,49 @@ public class Enemy : MonoBehaviour
             return;
 
         health -= dmg;
-        spriteRenderer.sprite = sprites[1];
-        Invoke("ToOriSprite", 0.1f);
+
+        if (enemyName == "B")
+        {
+            anime.SetTrigger("OnHit");
+        }
+        else
+        {
+            spriteRenderer.sprite = sprites[1];
+            Invoke("ToOriSprite", 0.1f);
+        }
+       
 
         if (health <= 0)
         {
             Player_move playerLogic = player.GetComponent<Player_move>();
             playerLogic.score += Enemy_score;
 
-            bool isdrop = (Random.Range(0, 2) == 0) ? false : true;
+            
+                int dropType = enemyName=="B"?0:Random.Range(0, 10);
 
-            if (isdrop)
-            {
-                int dropType = Random.Range(0, 10);
+            
 
-                if (dropType < 5) {
+                if (dropType>=3&&dropType < 6) {
                     GameObject ItemCoin=objManager.MakeObj("itemCoin");
                     ItemCoin.transform.position = transform.position;
                    
                 }
                    
-                else if (dropType <7)
+                else if (dropType <8)
                 {
                     GameObject ItemPower = objManager.MakeObj("itemPower");
                     ItemPower.transform.position = transform.position;
                    
                 }
                    
-                else if (dropType < 9)
+                else if (dropType < 10)
                 {
                     GameObject ItemBoom = objManager.MakeObj("itemBoom");
                     ItemBoom.transform.position = transform.position;
                    
                 }
                     
-            }
+            
 
             gameObject.SetActive(false);
             transform.rotation = Quaternion.identity; // set to the default rotation value(0)
@@ -143,7 +155,7 @@ public class Enemy : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "BorderBullet")
+        if (collision.gameObject.tag == "BorderBullet"&&enemyName!="B")
         {
             gameObject.SetActive(false);
             transform.rotation = Quaternion.identity;
