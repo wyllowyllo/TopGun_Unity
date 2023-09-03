@@ -57,7 +57,7 @@ public class ObjectManager : MonoBehaviour
         bulletEnemyA = new GameObject[100];
         bulletEnemyB = new GameObject[100];
         bulletEnemyC = new GameObject[100];
-        bulletEnemyD = new GameObject[100];
+        bulletEnemyD = new GameObject[1000];
         bulletFollower = new GameObject[100];
         Generate();
     }
@@ -137,7 +137,7 @@ public class ObjectManager : MonoBehaviour
 
         for (int i = 0; i < bulletEnemyB.Length; i++)
         {
-            bulletEnemyB[i] = Instantiate(bulletEnemyAPrefabs);
+            bulletEnemyB[i] = Instantiate(bulletEnemyBPrefabs);
             bulletEnemyB[i].SetActive(false);
         }
         for (int i = 0; i < bulletEnemyC.Length; i++)
@@ -195,10 +195,10 @@ public class ObjectManager : MonoBehaviour
             case "bulletEnemyB":
                 targetPool = bulletEnemyB;
                 break;
-            case "bulletEnemyC":
+            case "bulletBossA":
                 targetPool = bulletEnemyC;
                 break;
-            case "bulletEnemyD":
+            case "bulletBossB":
                 targetPool = bulletEnemyD;
                 break;
             case "bulletFollower":
@@ -256,10 +256,10 @@ public class ObjectManager : MonoBehaviour
             case "bulletEnemyB":
                 targetPool = bulletEnemyB;
                 break;
-            case "bulletEnemyC":
+            case "bulletBossA":
                 targetPool = bulletEnemyC;
                 break;
-            case "bulletEnemyD":
+            case "bulletBossB":
                 targetPool = bulletEnemyD;
                 break;
             case "bulletFollower":

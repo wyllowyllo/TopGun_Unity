@@ -197,3 +197,6 @@ MonoBehaviour:
   objManager: {fileID: 0}
   maxShotDelay: 0
   curShotDelay: 0
+  patternIndex: 0
+  curPatternCount: -1
+  maxPatternCount: 0200000003000000630000000a000000
