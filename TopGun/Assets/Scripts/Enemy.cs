@@ -20,6 +20,7 @@ public class Enemy : MonoBehaviour
     public GameObject ItemCoin;
     public GameObject ItemPower;
     public ObjectManager objManager;
+    public GameManager gameManager;
     public float maxShotDelay;
     public float curShotDelay;
 
@@ -102,6 +103,7 @@ public class Enemy : MonoBehaviour
 
         if (health <= 0)
         {
+            gameManager.Call_Explosion(transform.position, enemyName);
             Player_move playerLogic = player.GetComponent<Player_move>();
             playerLogic.score += Enemy_score;
 
@@ -129,9 +131,9 @@ public class Enemy : MonoBehaviour
                     ItemBoom.transform.position = transform.position;
                    
                 }
-                    
             
 
+            CancelInvoke();
             gameObject.SetActive(false);
             transform.rotation = Quaternion.identity; // set to the default rotation value(0)
         }
@@ -194,6 +196,8 @@ public class Enemy : MonoBehaviour
 
     private void FireAround()
     {
+        if (health <= 0)
+            return;
         int roundNumA = 50; // the number of bullets
         int roundNumB = 40; // the number of bullets
         int roundNum = (curPatternCount%2==0)?roundNumA:roundNumB; // the number of bullets
@@ -205,11 +209,13 @@ public class Enemy : MonoBehaviour
             bullet.transform.rotation = Quaternion.identity;
             Rigidbody2D rigid = bullet.GetComponent<Rigidbody2D>();
 
-            Vector2 dirVec = new Vector2(Mathf.Cos(Mathf.PI * 2 * i / roundNum),
-                Mathf.Sin(Mathf.PI * 2 * i / roundNum));
+            Vector2 dirVec = new Vector2(Mathf.Cos(Mathf.PI * 2 * i / roundNum*1.5f),
+                Mathf.Sin(Mathf.PI * 2 * i / roundNum * 1.5f));
             rigid.AddForce(dirVec.normalized * 2, ForceMode2D.Impulse);
 
-            Vector3 rotateVec = Vector3.forward * 360 * i / roundNum + Vector3.forward * 90;
+
+            //rotate a sprite of bullets
+            Vector3 rotateVec = Vector3.forward * 360 * i / roundNum * 1.5f + Vector3.forward * 90;
             rigid.transform.Rotate(rotateVec);
         }
 
@@ -223,6 +229,8 @@ public class Enemy : MonoBehaviour
 
     private void FireArc()
     {
+        if (health <= 0)
+            return;
         GameObject bullet = objManager.MakeObj("bulletEnemyA");
         bullet.transform.position = transform.position;
         bullet.transform.rotation = Quaternion.identity;
@@ -241,6 +249,8 @@ public class Enemy : MonoBehaviour
 
     private void FireShot()
     {
+        if (health <= 0)
+            return;
         for (int i = 0; i < 5; i++)
         {
             GameObject bullet = objManager.MakeObj("bulletEnemyB");
@@ -262,6 +272,8 @@ public class Enemy : MonoBehaviour
 
     private void FireForward()
     {
+        if (health <= 0)
+            return;
         //Create bullet objs
         GameObject bulletL = objManager.MakeObj("bulletBossA");
         GameObject bulletR = objManager.MakeObj("bulletBossA");

@@ -19,6 +19,7 @@ public class Player_move : MonoBehaviour
     public bool bottom_collision;
     public bool left_collsion;
     public bool right_collsion;
+    public bool isRespawnTime;
 
 
     public float maxShotDelay;
@@ -30,9 +31,11 @@ public class Player_move : MonoBehaviour
     public GameObject bulletObjB;
     public GameObject boom_effect;
     public GameObject[] followers;
+    SpriteRenderer spriterenderer;
     private void Awake()
     {
         anime = GetComponent<Animator>();
+        spriterenderer = GetComponent<SpriteRenderer>();
     }
     // Update is called once per frame
     void Update()
@@ -134,7 +137,7 @@ public class Player_move : MonoBehaviour
             GameObject[] enemiesS = objManager.GetPool("enemyS");
             GameObject[] enemiesM = objManager.GetPool("enemyM");
             GameObject[] enemiesL = objManager.GetPool("enemyL");
-            
+            GameObject[] enemiesB = objManager.GetPool("boss");
 
             //GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
             for (int i = 0; i < enemiesS.Length; i++)
@@ -164,10 +167,21 @@ public class Player_move : MonoBehaviour
                 }
 
             }
+            for (int i = 0; i < enemiesB.Length; i++)
+            {
+                if (enemiesB[i].activeSelf)
+                {
+                    Enemy enemyLogic = enemiesB[i].GetComponent<Enemy>();
+                    enemyLogic.OnHit(500);
+                }
+
+            }
 
             //remove bullets
             GameObject[] bulletEnemyA = objManager.GetPool("bulletEnemyA");
             GameObject[] bulletEnemyB = objManager.GetPool("bulletEnemyB");
+            GameObject[] bulletBossA = objManager.GetPool("bulletBossA");
+            GameObject[] bulletBossB = objManager.GetPool("bulletBossB");
             //GameObject[] bullets = GameObject.FindGameObjectsWithTag("EnemyBullet");
             for (int i = 0; i < bulletEnemyA.Length; i++)
             {
@@ -180,7 +194,18 @@ public class Player_move : MonoBehaviour
                 if (bulletEnemyB[i].activeSelf)
                     bulletEnemyB[i].SetActive(false);
             }
-               
+            for (int i = 0; i < bulletBossA.Length; i++)
+            {
+                if (bulletBossA[i].activeSelf)
+                    bulletBossA[i].SetActive(false);
+            }
+
+            for (int i = 0; i < bulletBossB.Length; i++)
+            {
+                if (bulletBossB[i].activeSelf)
+                    bulletBossB[i].SetActive(false);
+            }
+
 
             Invoke("Off_BoomEffect", 3.0f);
         }
@@ -217,6 +242,7 @@ public class Player_move : MonoBehaviour
                 return;
 
             life--;
+            gameManager.Call_Explosion(transform.position, "P");
 
             if (life <= 0)
             {
@@ -305,5 +331,33 @@ public class Player_move : MonoBehaviour
             followers[1].SetActive(true);
         else if (power == 6)
             followers[2].SetActive(true);
+    }
+
+    private void OnEnable()
+    {
+        InvincibilityOn();
+        Invoke("InvincibilityOn", 3.0f);
+    }
+
+    void InvincibilityOn()
+    {
+        isRespawnTime = !isRespawnTime;
+
+        if (isRespawnTime)
+        {
+            spriterenderer.color = new Color(1, 1, 1, 0.5f);
+            for(int i = 0; i < followers.Length; i++)
+            {
+                followers[i].GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0.5f);
+            }
+        }
+        else
+        {
+            spriterenderer.color = new Color(1, 1, 1, 1f);
+            for (int i = 0; i < followers.Length; i++)
+            {
+                followers[i].GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1f);
+            }
+        }
     }
 }

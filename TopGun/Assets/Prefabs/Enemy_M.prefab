@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -1147401495359466748, guid: 138040323294fd440a3a823e5d70ad01, type: 3}
+  m_Sprite: {fileID: -323511045, guid: 138040323294fd440a3a823e5d70ad01, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -182,8 +182,8 @@ MonoBehaviour:
   health: 20
   Enemy_score: 80
   sprites:
-  - {fileID: -1147401495359466748, guid: 138040323294fd440a3a823e5d70ad01, type: 3}
-  - {fileID: -7844560889915226194, guid: 138040323294fd440a3a823e5d70ad01, type: 3}
+  - {fileID: -323511045, guid: 138040323294fd440a3a823e5d70ad01, type: 3}
+  - {fileID: -2102459475, guid: 138040323294fd440a3a823e5d70ad01, type: 3}
   player: {fileID: 0}
   bulletObjA: {fileID: 5143879910363100267, guid: b5452f9e79379d4429d0d31455078a0c, type: 3}
   bulletObjB: {fileID: 5143879910363100267, guid: 8d29d3ececdf03645967cb4a7aa30022, type: 3}
@@ -193,3 +193,6 @@ MonoBehaviour:
   objManager: {fileID: 0}
   maxShotDelay: 0
   curShotDelay: 0
+  patternIndex: 0
+  curPatternCount: 0
+  maxPatternCount: 

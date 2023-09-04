@@ -1874,7 +1874,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 3
-  power: 3
+  power: 1
   max_power: 3
   boom_num: 0
   max_boom_num: 3
@@ -1886,6 +1886,7 @@ MonoBehaviour:
   bottom_collision: 0
   left_collsion: 0
   right_collsion: 0
+  isRespawnTime: 0
   maxShotDelay: 0.15
   curShotDelay: 0
   gameManager: {fileID: 1270522822}
@@ -3675,6 +3676,7 @@ MonoBehaviour:
   bulletEnemyCPrefabs: {fileID: 5143879910363100267, guid: d0aee1d220c20434c9e2f6b5d66608ea, type: 3}
   bulletEnemyDPrefabs: {fileID: 5143879910363100267, guid: 6a8c9324b7b00324aa0c7fd261618088, type: 3}
   bulletFollowerPrefabs: {fileID: 5078738507278489658, guid: 0d3d29d4f3c9e4c4cb2ad5ac70804194, type: 3}
+  explosionPrefabs: {fileID: 6302642666620195683, guid: 1a5dd641ceebd5c47b3c4d2d40da0855, type: 3}
 --- !u!4 &1947017451
 Transform:
   m_ObjectHideFlags: 0

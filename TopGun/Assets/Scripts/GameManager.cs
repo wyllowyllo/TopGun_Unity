@@ -115,6 +115,7 @@ public class GameManager : MonoBehaviour
         Enemy enemyLogic = enemy.GetComponent<Enemy>();
         enemyLogic.player = player; //pass the player's info 
         enemyLogic.objManager = objManager;//pass the Objectmanager's info 
+        enemyLogic.gameManager = this; //pass the Gamemanager's info
 
         //set the velocity of each positon
         //right
@@ -160,14 +161,14 @@ public class GameManager : MonoBehaviour
         Player_move playerLogic = player.GetComponent<Player_move>();
         playerLogic.isHit = false;
 
-        player.layer = 6;
-        Invoke("InvincibilityOff", 2.0f);
+       /* player.layer = 6;
+        Invoke("InvincibilityOff", 2.0f);*/
     }
 
-    void InvincibilityOff()
+  /*  void InvincibilityOff()
     {
         player.layer = 3;
-    }
+    }*/
 
     public void UpdateLifeImage(int life)
     {
@@ -203,5 +204,14 @@ public class GameManager : MonoBehaviour
     public void GameRetry()
     {
         SceneManager.LoadScene(0);
+    }
+
+    public void Call_Explosion(Vector3 pos,string type)
+    {
+        GameObject explosion = objManager.MakeObj("explosion");
+        Explosion explosionLogic = explosion.GetComponent<Explosion>();
+        explosionLogic.transform.position = pos;
+        explosionLogic.OnExplosion(type);
+        
     }
 }
