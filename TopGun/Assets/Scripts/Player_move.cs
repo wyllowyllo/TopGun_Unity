@@ -21,7 +21,7 @@ public class Player_move : MonoBehaviour
     public bool right_collsion;
     public bool isRespawnTime;
     public bool[] joyControl;
-    public bool isControl;
+    public bool isControl=true;
     public bool isButtonADown;
     public bool isButtonBDown;
 
@@ -77,13 +77,16 @@ public class Player_move : MonoBehaviour
 
         if (joyControl[0]) { h = -1;v = 1; }
         if (joyControl[1]) { h = 0; v = 1; }
-        if (joyControl[2]) { h = 1; v = 1; }
+        if(joyControl[2]) { h = 1; v = 1; }
         if (joyControl[3]) { h = -1; v = 0; }
         if (joyControl[4]) { h = 0; v = 0; }
         if (joyControl[5]) { h = 1; v = 0; }
         if (joyControl[6]) { h = -1; v = -1; }
         if (joyControl[7]) { h = 0; v = -1; }
         if (joyControl[8]) { h = 1; v = -1; }
+        
+
+       
 
         if ((h == 1 && right_collsion) || (h == -1 && left_collsion)||!isControl)
             h = 0;
@@ -113,6 +116,10 @@ public class Player_move : MonoBehaviour
     public void Button_B_Down()
     {
         isButtonBDown = true;
+    }
+    public void Button_B_Up()
+    {
+        isButtonBDown = false;
     }
     void Fire()
     {
