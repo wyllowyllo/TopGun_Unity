@@ -20,7 +20,10 @@ public class Player_move : MonoBehaviour
     public bool left_collsion;
     public bool right_collsion;
     public bool isRespawnTime;
-
+    public bool[] joyControl;
+    public bool isControl;
+    public bool isButtonADown;
+    public bool isButtonBDown;
 
     public float maxShotDelay;
     public float curShotDelay;
@@ -51,14 +54,40 @@ public class Player_move : MonoBehaviour
         curShotDelay += Time.deltaTime;
     }
 
+    public void JoyPanel(int type)
+    {
+        for(int i = 0; i < 9; i++)
+        {
+            joyControl[i] = (i == type);
+        }
+    }
+    public void JoyDown()
+    {
+        isControl = true;
+
+    }
+    public void JoyUp()
+    {
+        isControl = false;
+    }
     void Move()
     {
         float h = Input.GetAxisRaw("Horizontal");
-        if ((h == 1 && right_collsion) || (h == -1 && left_collsion))
-            h = 0;
-
         float v = Input.GetAxisRaw("Vertical");
-        if ((v == 1 && top_collision) || (v == -1 && bottom_collision))
+
+        if (joyControl[0]) { h = -1;v = 1; }
+        if (joyControl[1]) { h = 0; v = 1; }
+        if (joyControl[2]) { h = 1; v = 1; }
+        if (joyControl[3]) { h = -1; v = 0; }
+        if (joyControl[4]) { h = 0; v = 0; }
+        if (joyControl[5]) { h = 1; v = 0; }
+        if (joyControl[6]) { h = -1; v = -1; }
+        if (joyControl[7]) { h = 0; v = -1; }
+        if (joyControl[8]) { h = 1; v = -1; }
+
+        if ((h == 1 && right_collsion) || (h == -1 && left_collsion)||!isControl)
+            h = 0;
+        if ((v == 1 && top_collision) || (v == -1 && bottom_collision) || !isControl)
             v = 0;
 
         Vector3 curPos = transform.position;
@@ -72,12 +101,25 @@ public class Player_move : MonoBehaviour
             anime.SetInteger("Input", (int)h);
         }
     }
+
+    public void Button_A_Down()
+    {
+        isButtonADown = true;
+    }
+    public void Button_A_Up()
+    {
+        isButtonADown = false;
+    }
+    public void Button_B_Down()
+    {
+        isButtonBDown = true;
+    }
     void Fire()
     {
         if (curShotDelay < maxShotDelay) //it doesn't work until Reloading is completed
             return;
 
-        if (Input.GetButton("Fire1"))
+        if (isButtonADown)
         {
 
             switch (power)
@@ -125,7 +167,7 @@ public class Player_move : MonoBehaviour
 
     void Boom()
     {
-        if (Input.GetButtonDown("Fire2") && !isboom_time && boom_num >= 1)
+        if (isButtonBDown && !isboom_time && boom_num >= 1)
         {
             boom_num--;
             isboom_time = true;
@@ -350,6 +392,7 @@ public class Player_move : MonoBehaviour
             {
                 followers[i].GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0.5f);
             }
+            gameObject.layer = 6;
         }
         else
         {
@@ -358,6 +401,7 @@ public class Player_move : MonoBehaviour
             {
                 followers[i].GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1f);
             }
+            gameObject.layer = 3;
         }
     }
 }
