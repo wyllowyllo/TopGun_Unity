@@ -21,7 +21,7 @@ public class Player_move : MonoBehaviour
     public bool right_collsion;
     public bool isRespawnTime;
     public bool[] joyControl;
-    public bool isControl=true;
+    public bool isControl;
     public bool isButtonADown;
     public bool isButtonBDown;
 
@@ -126,7 +126,7 @@ public class Player_move : MonoBehaviour
         if (curShotDelay < maxShotDelay) //it doesn't work until Reloading is completed
             return;
 
-        if (isButtonADown)
+        if (isButtonADown||Input.GetAxisRaw("Fire1")==1)
         {
 
             switch (power)

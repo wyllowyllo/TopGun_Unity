@@ -185,7 +185,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyName: B
   speed: 1.5
-  health: 10000
+  health: 200
   Enemy_score: 5000
   sprites: []
   player: {fileID: 0}
@@ -195,6 +195,7 @@ MonoBehaviour:
   ItemCoin: {fileID: 0}
   ItemPower: {fileID: 0}
   objManager: {fileID: 0}
+  gameManager: {fileID: 0}
   maxShotDelay: 0
   curShotDelay: 0
   patternIndex: 0

@@ -131,11 +131,16 @@ public class Enemy : MonoBehaviour
                     ItemBoom.transform.position = transform.position;
                    
                 }
-            
 
-            CancelInvoke();
+           
+
+           CancelInvoke();
             gameObject.SetActive(false);
             transform.rotation = Quaternion.identity; // set to the default rotation value(0)
+
+
+            if (enemyName == "B")
+                gameManager.EndStage();
         }
 
     }

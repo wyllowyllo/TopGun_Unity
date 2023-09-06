@@ -16,6 +16,12 @@ public class GameManager : MonoBehaviour
     public GameObject Gameover_set;
     public GameObject player;
     public ObjectManager objManager;
+    public Animator startanime;
+    public Animator endanime;
+    public Animator fadeanime;
+    public Transform player_spawnpos;
+
+    public int Stage;
 
     public float curSpawnDelay;
     public float nextSpawnDelay;
@@ -29,9 +35,47 @@ public class GameManager : MonoBehaviour
     {
         enemyObjs = new string[] { "enemyS", "enemyM", "enemyL" , "boss" };
         spawnList = new List<Spawn>();
-        ReadSpawnFile();
+        StartStage();
     }
 
+
+    public void StartStage()
+    {
+        //#.Stage UI load
+        startanime.SetTrigger("On");
+        startanime.GetComponent<Text>().text = "Stage " + Stage;
+       
+        //#. Read a spawn enemy file
+        ReadSpawnFile();
+
+        //#.Fade in
+        fadeanime.SetTrigger("In");
+    }
+    public void EndStage()
+    {
+        //#.Clear UI load
+        endanime.SetTrigger("OFF");
+        endanime.GetComponent<Text>().text = "Clear!";
+       
+       
+
+        //#.Fade out
+        fadeanime.SetTrigger("Out");
+        //#.Player repos
+        transform.position = player_spawnpos.position;
+
+        //#.Stage increment
+        Stage++;
+
+        //#.Next Stage
+
+        if (Stage < 2)
+            Invoke("StartStage", 5.0f);
+        else
+            Invoke("GameOver",6);
+
+      
+    }
     void ReadSpawnFile()
     {
         //Initialization
@@ -41,7 +85,7 @@ public class GameManager : MonoBehaviour
 
         //Read a respawn file
         //Load a file from the directory 'Resources'
-        TextAsset textFile = Resources.Load("Stage 0") as TextAsset; // if the 'Stage 0' file is not a 'TextAsset' type, return null;
+        TextAsset textFile = Resources.Load("Stage "+Stage) as TextAsset; // if the 'Stage 0' file is not a 'TextAsset' type, return null;
         StringReader stringReader = new StringReader(textFile.text);
 
       
@@ -161,14 +205,10 @@ public class GameManager : MonoBehaviour
         Player_move playerLogic = player.GetComponent<Player_move>();
         playerLogic.isHit = false;
 
-       /* player.layer = 6;
-        Invoke("InvincibilityOff", 2.0f);*/
+      
     }
 
-  /*  void InvincibilityOff()
-    {
-        player.layer = 3;
-    }*/
+
 
     public void UpdateLifeImage(int life)
     {
