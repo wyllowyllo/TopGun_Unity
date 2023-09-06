@@ -54,7 +54,7 @@ public class GameManager : MonoBehaviour
     public void EndStage()
     {
         //#.Clear UI load
-        endanime.SetTrigger("OFF");
+        endanime.SetTrigger("On");
         endanime.GetComponent<Text>().text = "Clear!";
        
        
@@ -69,8 +69,8 @@ public class GameManager : MonoBehaviour
 
         //#.Next Stage
 
-        if (Stage < 2)
-            Invoke("StartStage", 5.0f);
+        if (Stage < 3)
+            Invoke("StartStage", 5);
         else
             Invoke("GameOver",6);
 
@@ -244,6 +244,7 @@ public class GameManager : MonoBehaviour
     public void GameRetry()
     {
         SceneManager.LoadScene(0);
+       
     }
 
     public void Call_Explosion(Vector3 pos,string type)

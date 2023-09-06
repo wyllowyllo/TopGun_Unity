@@ -132,15 +132,15 @@ public class Enemy : MonoBehaviour
                    
                 }
 
-           
+            if (enemyName == "B")
+                gameManager.EndStage();
 
-           CancelInvoke();
+            CancelInvoke();
             gameObject.SetActive(false);
             transform.rotation = Quaternion.identity; // set to the default rotation value(0)
 
 
-            if (enemyName == "B")
-                gameManager.EndStage();
+           
         }
 
     }
