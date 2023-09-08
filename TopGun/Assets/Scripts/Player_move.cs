@@ -126,7 +126,7 @@ public class Player_move : MonoBehaviour
         if (curShotDelay < maxShotDelay) //it doesn't work until Reloading is completed
             return;
 
-        if (isButtonADown||Input.GetAxisRaw("Fire1")==1)
+        if (isButtonADown)
         {
 
             switch (power)
