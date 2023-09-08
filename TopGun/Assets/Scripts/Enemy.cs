@@ -12,6 +12,8 @@ public class Enemy : MonoBehaviour
     public Sprite[] sprites;
     SpriteRenderer spriteRenderer;
     Animator anime;
+   
+
 
     public GameObject player;
     public GameObject bulletObjA;
@@ -35,6 +37,8 @@ public class Enemy : MonoBehaviour
        
         if(enemyName=="B")
             anime= GetComponent<Animator>();
+
+      
     }
 
     void Update()
@@ -63,8 +67,8 @@ public class Enemy : MonoBehaviour
         {
             GameObject bulletR = objManager.MakeObj("bulletEnemyB");
             GameObject bulletL = objManager.MakeObj("bulletEnemyB");
-            bulletR.transform.position = transform.position + Vector3.right * 03;
-            bulletL.transform.position = transform.position + Vector3.left * 03;
+            bulletR.transform.position = transform.position + Vector3.right * 0.3f;
+            bulletL.transform.position = transform.position + Vector3.left * 0.3f;
             Rigidbody2D rigidR = bulletR.GetComponent<Rigidbody2D>();
             Rigidbody2D rigidL = bulletL.GetComponent<Rigidbody2D>();
             Vector3 dirVecR = player.transform.position - transform.position;
@@ -104,6 +108,7 @@ public class Enemy : MonoBehaviour
         if (health <= 0)
         {
             gameManager.Call_Explosion(transform.position, enemyName);
+           
             Player_move playerLogic = player.GetComponent<Player_move>();
             playerLogic.score += Enemy_score;
 
@@ -168,7 +173,7 @@ public class Enemy : MonoBehaviour
 
     void Stop()
     {
-        //EnableÇÔ¼ö·Î ÀÎÇÑ StopÁßº¹½ÇÇà ¹æÁö
+        //Enableï¿½Ô¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Stopï¿½ßºï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         if (!gameObject.activeSelf)
             return;
         Rigidbody2D rigid = GetComponent<Rigidbody2D>();

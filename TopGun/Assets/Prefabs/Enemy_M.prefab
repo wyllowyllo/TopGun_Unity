@@ -191,6 +191,7 @@ MonoBehaviour:
   ItemCoin: {fileID: 6787234895135528108, guid: add567b9adcf7a743a2dbe3395467ec6, type: 3}
   ItemPower: {fileID: 6987344353012290852, guid: 2d48d09940ffc174892b16dcb83c4bb9, type: 3}
   objManager: {fileID: 0}
+  gameManager: {fileID: 0}
   maxShotDelay: 0
   curShotDelay: 0
   patternIndex: 0

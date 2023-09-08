@@ -185,7 +185,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyName: B
   speed: 1.5
-  health: 200
+  health: 5000
   Enemy_score: 5000
   sprites: []
   player: {fileID: 0}
