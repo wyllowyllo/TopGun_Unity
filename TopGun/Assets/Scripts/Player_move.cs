@@ -34,11 +34,16 @@ public class Player_move : MonoBehaviour
     public GameObject bulletObjB;
     public GameObject boom_effect;
     public GameObject[] followers;
+    AudioSource audiosource;
+    public AudioClip[] firesounds;
     SpriteRenderer spriterenderer;
+
+   
     private void Awake()
     {
         anime = GetComponent<Animator>();
         spriterenderer = GetComponent<SpriteRenderer>();
+        audiosource = GetComponent<AudioSource>();
     }
     // Update is called once per frame
     void Update()
@@ -168,6 +173,7 @@ public class Player_move : MonoBehaviour
             }
 
 
+            Firesound_play();
             curShotDelay = 0;
         }
     }
@@ -181,6 +187,9 @@ public class Player_move : MonoBehaviour
             gameManager.UpdateBoomImage(boom_num);
             //make the effect visible
             boom_effect.SetActive(true);
+
+            //play sound
+            boom_effect.GetComponent<AudioSource>().Play();
 
             //kill enemies
             GameObject[] enemiesS = objManager.GetPool("enemyS");
@@ -410,5 +419,24 @@ public class Player_move : MonoBehaviour
             }
             gameObject.layer = 3;
         }
+    }
+
+    void Firesound_play()
+    {
+        switch (power)
+        {
+            case 1:
+                audiosource.clip = firesounds[0];
+                break;
+            case 2:
+                audiosource.clip = firesounds[1];
+                break;
+            default:
+                audiosource.clip = firesounds[2];
+                break;
+
+
+        }
+        audiosource.Play();
     }
 }
